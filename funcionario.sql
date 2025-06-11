@@ -1,0 +1,15 @@
+--- 11-06-2025 07:57:45 SQLite
+CREATE table if not EXISTS funcionario(
+  CHAR nome  
+  CHAR CPF 
+  CHAR CARGA HORARIA  
+  CHAR ID FUNÇÃO 
+  CHAR ENDEREÇO 
+  CHAR TURNO  
+  CHAR ESTADO  
+  CHAR GENERO  
+  INT TELEFONE
+  VARCHAR DATA DE ADIMIÇÃO
+  );
+
+
