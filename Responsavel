@@ -1,9 +1,19 @@
-create TABLE if NOT EXISTS Responavel(
-  id Responavel INT PRIMARY KEY AUTOINCREMENT,
-  Nome VARCHAR (100)not NULL,
-  Grau parentesco TEXT,
-  Telefone VARCHAR (11)NOT NULL UNIQUE,
-  CPF VARCHAR (11)NOT NULL UNIQUE,
-  Email VARCHAR (50),
-  CGM
+create TABLE if NOT EXISTS responsavel(
+  id Responavel INTEGER PRIMARY KEY,
+  nome VARCHAR (100)not NULL,
+  grau_parentesco TEXT,
+  telefone VARCHAR (11)NOT NULL UNIQUE,
+  cpf VARCHAR (16)NOT NULL UNIQUE,
+  email VARCHAR (50),
+  cgm
 );
+
+INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email, cgm)
+VALUES (
+  'bruno duarte',
+  'pai',
+  '(78) 98574-652',
+  '123.456.789-00',
+  'marcanzoni@escola.pr.gov',
+  '54179848'
+  );
