@@ -1,5 +1,5 @@
 CREATE table if not EXISTS aluno(
-  CGM integer PRIMARY KEY AUTOINCREMENT NOT null UNIQUE,Add commentMore actions
+  CGM integer PRIMARY KEY AUTOINCREMENT NOT null UNIQUE,
   nome varchar (50) not NULL,
   endereço text,
   periodo varchar (5) not null ,
