@@ -1,5 +1,5 @@
 create TABLE if NOT EXISTS responsavel(
-  id Responavel INTEGER PRIMARY KEY,
+  id Responavel INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR (100)not NULL,
   grau_parentesco TEXT,
   telefone VARCHAR (11)NOT NULL UNIQUE,
@@ -12,8 +12,8 @@ INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email, cgm)
 VALUES (
   'bruno duarte',
   'pai',
-  '(78) 98574-652',
-  '123.456.789-00',
+  '(99) 55532-412',
+  '456.123.897-01',
   'marcanzoni@escola.pr.gov',
   '54179848'
   );
