@@ -1,9 +1,9 @@
 --- 11-06-2025 07:57:45 SQLite
 CREATE table if not EXISTS funcionario(
   nome VARCHAR(100) NOT NULL,
-  cpf VARCHAR(14) NOT NULL UNIQUE,
+  cpf VARCHAR(14) NOT NULL UNIQUE PRIMARY key,
   carga horaria VARCHAR,
-  id função INTEGER PRIMARY key AUTOINCREMENT,
+  id função INTEGER,
   endereço TEXT,
   turno VARCHAR, 
   estado VARCHAR, 
