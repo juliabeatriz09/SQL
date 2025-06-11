@@ -1,0 +1,9 @@
+create TABLE if NOT EXISTS Responavel(
+  id Responavel INT PRIMARY KEY AUTOINCREMENT,
+  Nome VARCHAR (100),
+  Grau parentesco TEXT,
+  Telefone VARCHAR (11),
+  CPF VARCHAR (11),
+  Email VARCHAR (50),
+  CGM
+);
