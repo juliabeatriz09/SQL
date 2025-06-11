@@ -1,0 +1,9 @@
+create TABLE if NOT EXISTS Encaminhamento(
+  id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo FO TEXT,
+  justifiativa TEXT,
+  providencia TEXT,
+  data DATE,
+  CGM,
+  funcionario
+);
