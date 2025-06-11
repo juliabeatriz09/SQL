@@ -1,11 +1,14 @@
-create TABLE if NOT EXISTS Responavel(
-  id Responavel INT PRIMARY KEY AUTOINCREMENT,
-  Nome VARCHAR (100)not NULL,
-  Grau parentesco TEXT,
-  Telefone VARCHAR (11)NOT NULL UNIQUE,
-  CPF VARCHAR (11)NOT NULL UNIQUE,
-  Email VARCHAR (50),
-  CGM
-);
-
-
+CREATE table if not EXISTS aluno(
+  CGM integer PRIMARY KEY AUTOINCREMENT NOT null UNIQUE,Add commentMore actions
+  nome varchar (50) not NULL,
+  endereço text,
+  periodo varchar (5) not null ,
+  cpf varchar (11) not NULL UNIQUE,
+  matricula date NOT NULL,
+  nascimento date not NULL,
+  rg varchar (9) NOT NULL unique ,
+  genero text,
+  telefone varchar (15),
+  turma varchar (3) not NULL,
+  responsavel
+  );
