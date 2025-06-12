@@ -1,9 +1,19 @@
-create TABLE if NOT EXISTS Encaminhamento(
+create TABLE if NOT EXISTS encaminhamento(
   id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo FO TEXT,
-  justifiativa TEXT,
+  tipo_fo TEXT,
+  justificativa TEXT,
   providencia TEXT,
   data DATE,
-  CGM,
+  cmg ,
   funcionario
 );
+
+INSERT INTO encaminhamento (tipo_fo, justificativa, providencia, data, cmg, funcionario)
+VALUES (
+  'grave',
+  'aluno bateu no outro',
+  'pratulha escolar',
+  '2025-04-03',
+  '15425896',
+  'cabo Ramalho'
+ );
