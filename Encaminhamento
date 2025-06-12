@@ -4,11 +4,13 @@ create TABLE if NOT EXISTS encaminhamento(
   justificativa TEXT not NULL,
   providencia TEXT,
   data DATE not NULL,
-  cmg ,
-  funcionario
+  cgm INTEGER,
+  funcionario VARCHAR(14),
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
+  FOREIGN KEY (funcionario) REFERENCES funcionario (cpf)
 );
 
-INSERT INTO encaminhamento (tipo_fo, justificativa, providencia, data, cmg, funcionario)
+INSERT INTO encaminhamento (tipo_fo, justificativa, providencia, data, cgm, funcionario)
 VALUES (
   'grave',
   'aluno bateu no outro',
