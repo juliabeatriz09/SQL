@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS funçao(
- funcionario VARCHAR (100),
- descrição VARCHAR (150),
- contrato VARCHAR (500),
+ funcionario VARCHAR (100)NOT NULL,
+ descrição VARCHAR (150)NOT NULL,
+ contrato VARCHAR (500)NOT NULL,
  id  INTEGER PRIMARY KEY AUTOINCREMENT
  );
   
