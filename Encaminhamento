@@ -1,9 +1,9 @@
 create TABLE if NOT EXISTS encaminhamento(
   id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo_fo TEXT,
-  justificativa TEXT,
+  tipo_fo TEXT not NULL ,
+  justificativa TEXT not NULL,
   providencia TEXT,
-  data DATE,
+  data DATE not NULL,
   cmg ,
   funcionario
 );
