@@ -1,14 +1,14 @@
 CREATE table if not EXISTS funcionario(
   nome VARCHAR(100) NOT NULL,
   cpf VARCHAR(14) NOT NULL UNIQUE PRIMARY key,
-  carga_horaria VARCHAR,
+  carga_horaria VARCHAR NOT NULL,
   id_função VARCHAR,
   endereço TEXT,
-  turno VARCHAR, 
+  turno VARCHAR NOT NULL, 
   estado VARCHAR, 
   genero VARCHAR,  
-  telefone VARCHAR(15),
-  data_adimição DATE 
+  telefone VARCHAR(15)NOT NULL UNIQUE,
+  data_adimição DATE NOT NULL
   );
   
   INSERT INTO funcionario (nome, cpf, carga_horaria, endereço, turno, estado, genero, telefone, data_adimição)
