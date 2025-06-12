@@ -1,10 +1,10 @@
 CREATE table if not EXISTS frequencia (
   frequencia varchar (10),
-  cgm integer PRIMARY key,
-  dia date,
-  quant_aulas int,
-  ausencias int,
-  turma varchar (4)
+  cgm integer PRIMARY key NOT NULL UNIQUE,
+  dia date NOT NULL,
+  quant_aulas int NOT NULL,
+  ausencias int NOT NULL,
+  turma varchar (4) NOT NULL
   );
   
   INSERT INTO frequencia (frequencia, cgm, dia, quant_aulas, ausencias, turma)
