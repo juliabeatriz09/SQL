@@ -1,19 +1,19 @@
 create TABLE if NOT EXISTS responsavel(
-  id Responavel INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_responavel INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR (100)not NULL,
   grau_parentesco TEXT,
   telefone VARCHAR (11)NOT NULL UNIQUE,
   cpf VARCHAR (16)NOT NULL UNIQUE,
   email VARCHAR (50),
-  cgm
+  cgm INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm)
 );
 
-INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email, cgm)
+INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email)
 VALUES (
   'bruno duarte',
   'pai',
-  '(99) 55532-412',
-  '456.123.897-01',
-  'marcanzoni@escola.pr.gov',
-  '54179848'
+  '(77) 55532-412',
+  '456.123.897-33',
+  'marcanzoni@escola.pr.gov'
   );
