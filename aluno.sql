@@ -1,5 +1,5 @@
 CREATE table if not EXISTS aluno(
-  cgm integer PRIMARY KEY AUTOINCREMENT NOT null UNIQUE,
+  cgm integer PRIMARY KEY  NOT null UNIQUE,
   nome varchar (50) not NULL,
   endereço text,
   periodo varchar (5) not null ,
@@ -10,19 +10,21 @@ CREATE table if not EXISTS aluno(
   genero text,
   telefone varchar (15),
   turma varchar (3) not NULL,
-  responsavel
+  responsavel varchar (500),
+  id_fo integer,
+  FOREIGN key (id_fo) REFERENCES fo (id_fo)
   );
 
 INSERT INTO aluno (cgm, nome, endereço, periodo, cpf, matricula, nascimento, rg, genero, telefone, turma, responsavel)
 VALUES (
-  '145236875',
-  'bruno daurte',
+  '895236875',
+  'bruno duarte',
   'rua major acylino de castro, 812',
   'matutino',
-  '999.888.777-44',
+  '999.888.777-88',
   'ensino medio',
   '2007-10-16',
-  '124578369',
+  '884578369',
   'masculino',
   '(45) 78945-523',
   '3c',
