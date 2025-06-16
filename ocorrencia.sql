@@ -1,12 +1,15 @@
 CREATE table if not EXISTS ocorrencia(
 id_sequencial_ocorrencia INTEGER PRIMARY key AUTOINCREMENT,
 fato_id varchar (50)NOT NULL, 
-cpf_funcionario VARCHAR NOT NULL UNIQUE,
-data DATE(8)NOT NULL,
+cpf_funcionario VARchar,
+FOREIGN key (cpf_funcionario) REFERENCES funcionario (cpf),
+data DATE NOT NULL,
 horario VARCHAR(4),
-cgm_aluno VARCHAR(9)NOT NULL UNIQUE ,
+cgm_aluno VARCHAR,
+FOREIGN KEY (cgm) REFERENCES aluno (cgm),
 obs VARCHAR(500),
 turma VARCHAR(3) NOT NULL 
+  
 );
 
 INSERT INTO ocorrencia (fato_id, cpf_funcionario, data, horario, cgm_aluno, obs, turma)
