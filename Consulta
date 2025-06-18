@@ -1,0 +1,27 @@
+--Listar todos os alunos
+SELECT * FROM aluno ;
+
+--Listar todos os usuários ordenados por nome
+SELECT * FROM aluno ORDER BY nome;
+
+-- alunos com ocorrencia leve
+SELECT nome, id_fo FROM aluno
+WHERE acima de  > -1;
+
+--Listar aluno por encaminhamento 
+SELECT aluno.nome, encaminhamento.tipo_fo AS encaminhamento 
+FROM aluno
+JOIN encaminhamento ON aluno.encaminhamento = encaminhamento.aluno;
+
+--Mostrar empréstimos com nome do usuário e título do livro
+SELECT usuarios.nome AS usuario, livros.titulo, emprestimos.data_emprestimo, emprestimos.data_devolucao
+FROM emprestimos
+JOIN usuarios ON emprestimos.id_usuario = usuarios.id_usuario
+JOIN livros ON emprestimos.id_livro = livros.id_livro;
+
+--Empréstimos feitos por "Ana Souza"
+SELECT livros.titulo, emprestimos.data_emprestimo
+FROM emprestimos
+JOIN usuarios ON emprestimos.id_usuario = usuarios.id_usuario
+JOIN livros ON emprestimos.id_livro = livros.id_livro
+WHERE usuarios.nome = 'Ana Souza';
