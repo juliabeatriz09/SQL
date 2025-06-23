@@ -1,29 +1,10 @@
---Listar todos os alunos
-SELECT * FROM aluno ;
+SELECT usuarios.nome AS nome_USUARIO
+select livros.titulo as titulo_LIVRO 
+SELECT autores.nome as nome_AUTOR 
+SELECT emprestimo.data_emprestimo as data-EMPRESTIMO 
 
---Listar todos os encaminhamentos
-SELECT * FROM encaminhamento ;
+FROM emprestimos demo
 
---Listar todos os F.Os
-SELECT * FROM fato  ;
-
---Listar todos as ocorrencias
-SELECT * FROM ocorrencia ;
-
---Listar todos os funcionarios 
-SELECT * FROM funcionario  ;
-
---Listar todos as frequencias
-SELECT * FROM frequencia;
-
---Listar todos as atas
-SELECT * FROM ata ;
-
---Listar todos os encaminhamentos ordenados aluno 
-SELECT * FROM encaminhamento ORDER BY cgm;
-
---Listar todos os frequencia ordenados aluno 
-SELECT * FROM frequencia ORDER BY cgm; 
-
---Listar todos os alunos ordenados nome
-SELECT * FROM aluno  ORDER BY nome;
+INNER JOIN usuarios on emprestimo.id_usuario = usuario.id_usuario  
+inner join livros on empretimo.id_livros = livros.id_livros 
+INNER JOIN autores on livro.id_autor = autor.id_autor 
