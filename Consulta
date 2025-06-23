@@ -1,10 +1,16 @@
-SELECT usuarios.nome AS nome_USUARIO
+-- serve para nomear a tabela e seu elemento correspondente 
+SELECT usuarios.nome AS nome_USUARIO --tabela e seu elemento correspondente  -- nome dado
 select livros.titulo as titulo_LIVRO 
 SELECT autores.nome as nome_AUTOR 
 SELECT emprestimo.data_emprestimo as data-EMPRESTIMO 
 
+-- define a tabela principal 
 FROM emprestimos demo
 
+-- puxa por id semelhante entre tabelas 
 INNER JOIN usuarios on emprestimo.id_usuario = usuario.id_usuario  
 inner join livros on empretimo.id_livros = livros.id_livros 
 INNER JOIN autores on livro.id_autor = autor.id_autor 
+
+-- busca mais especifica (por tipo)
+WHERE emprestimo.tipo = "c" 
