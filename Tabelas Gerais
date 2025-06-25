@@ -77,9 +77,9 @@ CREATE TABLE if not EXISTS ata(
   FOREIGN KEY (id) REFERENCES funcao(id)
   );
   
-  CREATE TABLE IF NOT EXISTS funçao(
+  CREATE TABLE IF NOT EXISTS funcao(
  funcionario VARCHAR (100)NOT NULL,
- descrição VARCHAR (150)NOT NULL,
+ descricao VARCHAR (150)NOT NULL,
  contrato VARCHAR (500)NOT NULL,
  id  INTEGER PRIMARY KEY AUTOINCREMENT
  );
@@ -106,7 +106,7 @@ CREATE table if not EXISTS aluno(
   genero text,
   email_aluno varchar (800),
   telefone_aluno varchar (15),
-  endereço varchar (500),
+  endereco varchar (500),
   cep varchar (9),
   numero integer,
   complemento varchar (200),
