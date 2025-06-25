@@ -14,3 +14,32 @@ INNER JOIN autores on livro.id_autor = autor.id_autor
 
 -- busca mais especifica (por tipo)
 WHERE emprestimo.tipo = "c" 
+
+
+
+--Listar todos os encaminhamentosAdd commentMore actions
+SELECT * FROM encaminhamento ;
+
+--Listar todos os F.Os
+SELECT * FROM fato  ;
+
+--Listar todos as ocorrencias
+SELECT * FROM ocorrencia ;
+
+--Listar todos os funcionarios 
+SELECT * FROM funcionario  ;
+
+--Listar todos as frequencias
+SELECT * FROM frequencia;
+
+--Listar todos as atas
+SELECT * FROM ata ;
+
+--Listar todos os encaminhamentos ordenados aluno 
+SELECT * FROM encaminhamento ORDER BY cgm;
+
+--Listar todos os frequencia ordenados aluno 
+SELECT * FROM frequencia ORDER BY cgm; 
+
+--Listar todos os alunos ordenados nome
+SELECT * FROM aluno  ORDER BY nome;
