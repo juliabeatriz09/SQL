@@ -1,0 +1,4 @@
+-- puxa por id semelhante entre tabelas 
+INNER JOIN ocorrencia on fato.id_ato = correncia.fato_id 
+inner join ocorrencia on aluno.cgm_aluno = ocorrencia.id_cgm
+INNER JOIN ocorrencia on funcioario.cpf = ocorrencia.cpf.funcionario
