@@ -12,7 +12,15 @@ CREATE TABLE IF NOT EXISTS encaminhamento (
   FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
   FOREIGN KEY (id_fato) REFERENCES fato(id_fato)
 );
-
+ INSERT INTO encaminhamento (tipo_fo, justificativa, providencia, data, cgm, cpf_funcionario)
+ VALUES (
+  'grave',
+  'aluno bateu no outro',
+  'pratulha escolar',
+  '2025-04-03',
+  '15425896',
+  '789.484.987.45'
+ );
 
 create TABLE if NOT EXISTS responsavel(
  id_responsavel INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,6 +33,15 @@ create TABLE if NOT EXISTS responsavel(
   FOREIGN KEY (cgm) REFERENCES aluno(cgm)
 );
 
+ INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email, cgm)
+ VALUES (
+   'bruno duarte',
+   'pai',
+   '(88) 8956-785',
+   '123.456.789-88',
+   'bruno@gmail.com',
+   '78985464'
+);
 CREATE TABLE if not EXISTS ata(
   id_ata integer primary KEY AUTOINCREMENT,
   aluno varchar (50) not null,
@@ -39,12 +56,32 @@ CREATE TABLE if not EXISTS ata(
   fato varchar (20) not null
   );
   
+   INSERT INTO ata (aluno, dia, assunto, monitor, conteudo, encaminhamento, cgm, turma, prof, fato)
+VALUES (
+  'Bruno Duarte',
+  '2025-02-03',
+  'desacato a funcionario publico',
+  'Cabo Ramalho',
+  'Aluno faltou com respeito com as merenderas',
+  'diretoria',
+  '1542369',
+  '3c',
+  'daffara',
+  'menos dois - Gravissimo'
+  );
+  
   create TABLE if not EXISTS fato(
   id_fato integer primary key AUTOINCREMENT ,
   descricao varchar (200)not NULL,
   gravidade varchar(30) not NULL
   );
-  
+   
+  INSERT INTO fato (descricao, gravidade)
+VALUES (
+  'dano ao patrimonio publico',
+  'gravissimo'
+ );
+ 
   CREATE table if not EXISTS frequencia (
   id_frequencia INTEGER PRIMARY KEY AUTOINCREMENT,
   dia date NOT NULL,
@@ -54,6 +91,16 @@ CREATE TABLE if not EXISTS ata(
   cgm INTEGER,
   FOREIGN KEY (cgm) REFERENCES aluno(cgm)
   );
+  
+    INSERT INTO frequencia ( dia, quant_aulas, ausencias, turma, cgm)
+VALUES (
+  '2025-10-25',
+  '6',
+  '4',
+  '3c',
+  '458798956'
+  );
+  
   
   CREATE table if not EXISTS funcionario(
   nome VARCHAR(100) NOT NULL,
@@ -88,6 +135,13 @@ CREATE TABLE if not EXISTS ata(
  id  INTEGER PRIMARY KEY AUTOINCREMENT
  );
  
+  INSERT INTO funcao (funcionario, descricao, contrato)
+VALUES (
+  'Diretora Gabriela',
+  'diretora do colegio',
+  '1 ano'
+  );
+  
 CREATE TABLE IF NOT EXISTS ocorrencia (
     id_sequencial_ocorrencia INTEGER PRIMARY KEY AUTOINCREMENT,
     cpf_funcionario VARCHAR,
@@ -102,6 +156,17 @@ CREATE TABLE IF NOT EXISTS ocorrencia (
     FOREIGN KEY (cgm_aluno) REFERENCES aluno(cgm)
 );
 
+INSERT INTO ocorrencia (id_fato, cpf_funcionario, data, horario, cgm_aluno, obs, turma)
+VALUES (
+  '1581561',
+  '444.555.666-74',
+  '2025-04-24',
+  '09:55',
+  '15648416',
+  'aluno demorou pra entrar pra sala',
+  '3c'
+  );
+  
 CREATE table if not EXISTS aluno(
   cgm integer PRIMARY KEY  NOT null UNIQUE,
   nome varchar (400) not NULL,
@@ -125,5 +190,36 @@ CREATE table if not EXISTS aluno(
   grau_parentesco varchar (40),
   cpf_responsavel varchar (11) not NULL UNIQUE,
   telefone_responsavel varchar (15),
-  email_responsavel varchar (800),
-
+  email_responsavel varchar (800)
+  );
+  
+  INSERT INTO aluno (cgm, nome, nascimento, cpf_aluno, rg, genero, email_aluno, telefone_aluno, endereco, cep, 
+  numero, omplemento, bairro, cidade, estado, curso, turno, turma, responsavel, grau_parentesco, cpf_responsavel,
+  telefone_responsavel, email_responsavel )
+VALUES (
+  '1485484',
+  'julia', 
+  '17-10-2008',
+  '741.852.963-36',
+  '789978954',
+  'feminino',
+  'julia@gmail.com',
+  '(89) 7859-5621',
+  'av. brasil',
+  '87945745',
+  '78',
+  'casa',
+  'centro',
+  'foz do iguaçu',
+  'parana',
+  'ds',
+  'matutino',
+  '3C',
+  'bruno duarte',
+   'pai',
+   '(99) 7895-785',
+   '123.456.789-55',
+   'bruno@gmail.com',
+   '78985464'
+  );
+SELECT * FROM demo;
