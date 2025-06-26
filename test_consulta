@@ -6,6 +6,7 @@ SELECT
   oco.data,
   oco.horario,
   oco.obs
+
 FROM 
   ocorrencia 
 INNER JOIN fato f ON oco.fato_id = f.id_fato
