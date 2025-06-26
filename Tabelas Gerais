@@ -1,17 +1,21 @@
-create TABLE if NOT EXISTS encaminhamento(
+
+CREATE TABLE IF NOT EXISTS encaminhamento (
   id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo_fo TEXT not NULL ,
-  justificativa TEXT not NULL,
+  tipo_fo TEXT NOT NULL,
+  justificativa TEXT NOT NULL,
   providencia TEXT,
-  data DATE not NULL,
+  data DATE NOT NULL,
   cgm INTEGER,
-  funcionario VARCHAR(14),
+  cpf_funcionario VARCHAR(14),
+  fato_id INTEGER,
   FOREIGN KEY (cgm) REFERENCES aluno(cgm),
-  FOREIGN KEY (funcionario) REFERENCES funcionario (cpf)
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
+  FOREIGN KEY (fato_id) REFERENCES fato(id_fato)
 );
 
+
 create TABLE if NOT EXISTS responsavel(
-  id_responavel INTEGER PRIMARY KEY AUTOINCREMENT,
+ id_responsavel INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR (100)not NULL,
   grau_parentesco TEXT,
   telefone VARCHAR (11)NOT NULL UNIQUE,
@@ -29,7 +33,7 @@ CREATE TABLE if not EXISTS ata(
   monitor varchar(50) not null,
   conteudo varchar (300),
   encaminhamento varchar (200),
-  cgm varchar (10) not null UNIQUE,
+  cgm varchar (10) not null ,
   turma varchar (3) not null,
   prof varchar (20),
   fato varchar (20) not null
@@ -73,8 +77,8 @@ CREATE TABLE if not EXISTS ata(
   carga_horaria integer,
   contrato varchar (80),
   numero_registro integer,
-  id  INTEGER,
-  FOREIGN KEY (id) REFERENCES funcao(id)
+  id_funcao INTEGER,
+  FOREIGN KEY (id_funcao) REFERENCES funcao(id)
   );
   
   CREATE TABLE IF NOT EXISTS funcao(
@@ -86,13 +90,14 @@ CREATE TABLE if not EXISTS ata(
  
 CREATE TABLE IF NOT EXISTS ocorrencia (
     id_sequencial_ocorrencia INTEGER PRIMARY KEY AUTOINCREMENT,
-    fato_id VARCHAR(50) NOT NULL,
     cpf_funcionario VARCHAR,
     data DATE NOT NULL,
     horario VARCHAR(4),
     cgm_aluno VARCHAR,
     obs VARCHAR(500),
     turma VARCHAR(3) NOT NULL,
+    fato_id INTEGER,
+    FOREIGN KEY (fato_id) REFERENCES fato(id_fato),
     FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
     FOREIGN KEY (cgm_aluno) REFERENCES aluno(cgm)
 );
@@ -124,3 +129,4 @@ CREATE table if not EXISTS aluno(
   id_fo integer,
   FOREIGN key (id_fo) REFERENCES fo (id_fo)
   );
+  
