@@ -33,7 +33,7 @@ SELECT
   e.data
 FROM 
   encaminhamento e
-INNER JOIN fato f ON e.fato_id = f.id_fato
+INNER JOIN fato f ON e.id_fato = f.id_fato
 INNER JOIN aluno a ON e.cgm = a.cgm
 INNER JOIN funcionario func ON e.cpf_funcionario = func.cpf;
 
