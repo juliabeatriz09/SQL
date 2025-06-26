@@ -38,8 +38,4 @@ INNER JOIN aluno a ON e.cgm = a.cgm
 INNER JOIN funcionario func ON e.cpf_funcionario = func.cpf;
 
 
-  id_fo integer,
-  FOREIGN key (id_fo) REFERENCES fo (id_fo)
-  );
-  
   
