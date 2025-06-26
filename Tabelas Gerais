@@ -41,7 +41,7 @@ CREATE TABLE if not EXISTS ata(
   
   create TABLE if not EXISTS fato(
   id_fato integer primary key AUTOINCREMENT ,
-  descriçao varchar (200)not NULL,
+  descricao varchar (200)not NULL,
   gravidade varchar(30) not NULL
   );
   
@@ -72,7 +72,7 @@ CREATE TABLE if not EXISTS ata(
   bairro varchar (100),
   cidade varchar (250),
   estado varchar (150),
-  data_adimição DATE NOT NULL,
+  data_adimicao DATE NOT NULL,
   cargo varchar (500),
   carga_horaria integer,
   contrato varchar (80),
@@ -126,7 +126,4 @@ CREATE table if not EXISTS aluno(
   cpf_responsavel varchar (11) not NULL UNIQUE,
   telefone_responsavel varchar (15),
   email_responsavel varchar (800),
-  id_fo integer,
-  FOREIGN key (id_fo) REFERENCES fo (id_fo)
-  );
-  
+
