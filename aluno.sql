@@ -22,6 +22,8 @@ CREATE table if not EXISTS aluno(
   cpf_responsavel varchar (11) not NULL UNIQUE,
   telefone_responsavel varchar (15),
   email_responsavel varchar (800),
+  id_frequencia integer,
+  foreign key (id_frequencia) references frequencias (id_frequencia),
   id_fo integer,
   FOREIGN key (id_fo) REFERENCES fo (id_fo)
   );
