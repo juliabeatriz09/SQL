@@ -7,10 +7,10 @@ CREATE TABLE IF NOT EXISTS encaminhamento (
   data DATE NOT NULL,
   cgm INTEGER,
   cpf_funcionario VARCHAR(14),
-  fato_id INTEGER,
+  id_fato INTEGER,
   FOREIGN KEY (cgm) REFERENCES aluno(cgm),
   FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
-  FOREIGN KEY (fato_id) REFERENCES fato(id_fato)
+  FOREIGN KEY (id_fato) REFERENCES fato(id_fato)
 );
 
 
@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS ocorrencia (
     cgm_aluno VARCHAR,
     obs VARCHAR(500),
     turma VARCHAR(3) NOT NULL,
-    fato_id INTEGER,
-    FOREIGN KEY (fato_id) REFERENCES fato(id_fato),
+    id_fato INTEGER,
+    FOREIGN KEY (id_fato) REFERENCES fato(id_fato),
     FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
     FOREIGN KEY (cgm_aluno) REFERENCES aluno(cgm)
 );
