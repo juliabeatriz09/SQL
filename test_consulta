@@ -26,3 +26,21 @@ FROM
 INNER JOIN aluno a ON freq.id_frequencia = a.frequencia
 INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
 INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
+
+
+SELECT 
+  encaminhamento.id_encaminhamento,
+  fo.descricao AS fato_descricao,
+  aluno.nome AS nome_aluno,
+  func.nome AS nome_funcionario,
+  encaminhamento.data,
+  encaminhamento.horario,
+  encaminhamento.obs
+
+FROM 
+ encaminhamento
+INNER JOIN fato ON encaminhamento.fato_id = fato.id_fato
+INNER JOIN aluno ON ocorrencia.cgm_aluno = aluno.cgm
+INNER JOIN funcionario func ON ocorrencia.cpf_funcionario = funcionario.cpf
+INNER JOIN encaminhamento ON fato.fato_id = encaminhamento.id_fato;
+
