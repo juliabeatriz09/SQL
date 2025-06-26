@@ -1,4 +1,4 @@
- SELECT 
+   SELECT 
   oco.id_sequencial_ocorrencia,
   f.descricao AS fato_descricao,
   a.nome AS nome_aluno,
@@ -9,7 +9,7 @@
   
 FROM 
   ocorrencia oco
-INNER JOIN fato f ON oco.fato_id = f.id_fato
+INNER JOIN fato f ON oco.id_fato = f.id_fato
 INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
 INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
 
@@ -38,3 +38,8 @@ INNER JOIN aluno a ON e.cgm = a.cgm
 INNER JOIN funcionario func ON e.cpf_funcionario = func.cpf;
 
 
+  id_fo integer,
+  FOREIGN key (id_fo) REFERENCES fo (id_fo)
+  );
+  
+  
