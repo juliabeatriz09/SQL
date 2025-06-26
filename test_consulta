@@ -11,3 +11,17 @@ FROM
 INNER JOIN fato f ON oco.fato_id = f.id_fato
 INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
 INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
+
+
+SELECT 
+  frequencia.ausencia AS freq_aluno,
+  frequencia.quant_aulas AS aulas,
+  aluno.nome AS nome_aluno,
+  aluno.turma AS turma_aluno,
+  func.nome AS nome_funcionario
+  
+FROM 
+  frequencia
+INNER JOIN aluno a ON freq.id_frequencia = a.frequencia
+INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
+INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
