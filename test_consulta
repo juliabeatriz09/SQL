@@ -1,46 +1,40 @@
-SELECT 
+ SELECT 
   oco.id_sequencial_ocorrencia,
-  fo.descricao AS fato_descricao,
-  aluno.nome AS nome_aluno,
+  f.descricao AS fato_descricao,
+  a.nome AS nome_aluno,
   func.nome AS nome_funcionario,
   oco.data,
   oco.horario,
   oco.obs
-
+  
 FROM 
-  ocorrencia 
+  ocorrencia oco
 INNER JOIN fato f ON oco.fato_id = f.id_fato
 INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
 INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
 
-
 SELECT 
-  frequencia.ausencia AS freq_aluno,
-  frequencia.quant_aulas AS aulas,
-  aluno.nome AS nome_aluno,
-  aluno.turma AS turma_aluno,
+  f.ausencias AS freq_aluno,
+  f.quant_aulas AS aulas,
+  a.nome AS nome_aluno,
+  a.turma AS turma_aluno,
   func.nome AS nome_funcionario
   
 FROM 
-  frequencia
-INNER JOIN aluno a ON freq.id_frequencia = a.frequencia
-INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
-INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
-
+  frequencia f
+ INNER JOIN aluno a ON f.cgm = a.cgm
+ JOIN funcionario func ON func.cpf = '...'  -- associar com um professor, se possível
 
 SELECT 
-  encaminhamento.id_encaminhamento,
-  fo.descricao AS fato_descricao,
-  aluno.nome AS nome_aluno,
+  e.id_encaminhamento,
+  f.descricao AS fato_descricao,
+  a.nome AS nome_aluno,
   func.nome AS nome_funcionario,
-  encaminhamento.data,
-  encaminhamento.horario,
-  encaminhamento.obs
-
+  e.data
 FROM 
- encaminhamento
-INNER JOIN fato ON encaminhamento.fato_id = fato.id_fato
-INNER JOIN aluno ON ocorrencia.cgm_aluno = aluno.cgm
-INNER JOIN funcionario func ON ocorrencia.cpf_funcionario = funcionario.cpf
-INNER JOIN encaminhamento ON fato.fato_id = encaminhamento.id_fato;
+  encaminhamento e
+INNER JOIN fato f ON e.fato_id = f.id_fato
+INNER JOIN aluno a ON e.cgm = a.cgm
+INNER JOIN funcionario func ON e.cpf_funcionario = func.cpf;
+
 
