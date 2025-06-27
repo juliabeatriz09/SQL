@@ -1,115 +1,47 @@
-CREATE TABLE IF NOT EXISTS encaminhamento (
-  id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo_fo TEXT NOT NULL,
-  justificativa TEXT NOT NULL,
-  providencia TEXT,
-  data DATE NOT NULL,
-  cgm INTEGER,
-  cpf_funcionario VARCHAR(14),
-  id_fato INTEGER,
-  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
-  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
-  FOREIGN KEY (id_fato) REFERENCES fato(id_fato)
+CREATE TABLE IF NOT EXISTS funcao (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  funcionario VARCHAR(100) NOT NULL,
+  descricao VARCHAR(150) NOT NULL,
+  contrato VARCHAR(500) NOT NULL
 );
 
+INSERT INTO funcao (funcionario, descricao, contrato) VALUES
+('Diretora Gabriela', 'Diretora da escola', '1 ano');
 
-create TABLE if NOT EXISTS responsavel(
- id_responsavel INTEGER PRIMARY KEY AUTOINCREMENT,
-  nome VARCHAR (100)not NULL,
-  grau_parentesco TEXT,
-  telefone VARCHAR (11)NOT NULL UNIQUE,
-  cpf VARCHAR (16)NOT NULL UNIQUE,
-  email VARCHAR (50),
-  cgm INTEGER,
-  FOREIGN KEY (cgm) REFERENCES aluno(cgm)
-);
-
-
-CREATE TABLE if not EXISTS ata(
-  id_ata integer primary KEY AUTOINCREMENT,
-  aluno varchar (50) not null,
-  dia date not null,
-  assunto varchar (500) not null,
-  monitor varchar(50) not null,
-  conteudo varchar (300),
-  encaminhamento varchar (200),
-  cgm varchar (10) not null ,
-  turma varchar (3) not null,
-  prof varchar (20),
-  fato varchar (20) not null
-  );
-  
-   
-  create TABLE if not EXISTS fato(
-  id_fato integer primary key AUTOINCREMENT ,
-  descricao varchar (200)not NULL,
-  gravidade varchar(30) not NULL
-  );
-   
- 
- 
-  CREATE table if not EXISTS frequencia (
-  id_frequencia INTEGER PRIMARY KEY AUTOINCREMENT,
-  dia date NOT NULL,
-  quant_aulas int NOT NULL,
-  ausencias int NOT NULL,
-  turma varchar (4) NOT NULL,
-  cpf_funcionario varchar,
-  cgm INTEGER,
-  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
-  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf)
-  );
-  
-  CREATE table if not EXISTS funcionario(
+CREATE TABLE IF NOT EXISTS funcionario (
   nome VARCHAR(100) NOT NULL,
-  cpf VARCHAR(14) NOT NULL UNIQUE PRIMARY key,
-  nascimento date not null,
-  rg varchar (16) not null,
-  genero text,
-  estado_civil text,
-  email text,
-  email_institucional text,
-  telefone VARCHAR(15)NOT NULL UNIQUE,
-  telefone_alternativo VARCHAR(15)NOT NULL,
-  cep varchar (9),
-  numero integer,
-  complemento varchar (200),
-  bairro varchar (100),
-  cidade varchar (250),
-  estado varchar (150),
+  cpf VARCHAR(14) PRIMARY KEY,
+  nascimento DATE NOT NULL,
+  rg VARCHAR(16) NOT NULL,
+  genero TEXT,
+  estado_civil TEXT,
+  email TEXT,
+  email_institucional TEXT,
+  telefone VARCHAR(15) NOT NULL UNIQUE,
+  telefone_alternativo VARCHAR(15),
+  cep VARCHAR(9),
+  numero INTEGER,
+  complemento VARCHAR(200),
+  bairro VARCHAR(100),
+  cidade VARCHAR(250),
+  estado VARCHAR(150),
   data_adimicao DATE NOT NULL,
-  cargo varchar (500),
-  carga_horaria integer,
-  contrato varchar (80),
-  numero_registro integer,
+  cargo VARCHAR(500),
+  carga_horaria INTEGER,
+  contrato VARCHAR(80),
+  numero_registro INTEGER,
   id_funcao INTEGER,
   FOREIGN KEY (id_funcao) REFERENCES funcao(id)
-  );
-  
-  CREATE TABLE IF NOT EXISTS funcao(
- funcionario VARCHAR (100)NOT NULL,
- descricao VARCHAR (150)NOT NULL,
- contrato VARCHAR (500)NOT NULL,
- id  INTEGER PRIMARY KEY AUTOINCREMENT
- );
- 
-  
-CREATE TABLE IF NOT EXISTS ocorrencia (
-  id_sequencial_ocorrencia INTEGER PRIMARY KEY AUTOINCREMENT,
-  cpf_funcionario VARCHAR(14),
-  data DATE NOT NULL,
-  horario VARCHAR(5),
-  cgm_aluno INTEGER,
-  obs VARCHAR(500),
-  turma VARCHAR(3) NOT NULL,
-  id_fato INTEGER,
-  FOREIGN KEY (id_fato) REFERENCES fato(id_fato),
-  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
-  FOREIGN KEY (cgm_aluno) REFERENCES aluno(cgm)
+);
+
+INSERT INTO funcionario VALUES (
+  'Carlos Silva', '789.484.987-45', '1980-05-20', '123456789', 'masculino', 'solteiro',
+  'carlos@gmail.com', 'carlos@escola.gov', '(11)91234-5678', '(11)99876-5432', '12345-678', 123,
+  'apt 10', 'centro', 'São Paulo', 'SP', '2020-01-01', 'Professor', 40, 'CLT', 123456, 1
 );
 
 CREATE TABLE IF NOT EXISTS aluno (
-  cgm INTEGER PRIMARY KEY NOT NULL UNIQUE,
+  cgm INTEGER PRIMARY KEY,
   nome VARCHAR(400) NOT NULL,
   nascimento DATE NOT NULL,
   cpf_aluno VARCHAR(14) NOT NULL UNIQUE,
@@ -133,7 +65,104 @@ CREATE TABLE IF NOT EXISTS aluno (
   telefone_responsavel VARCHAR(15),
   email_responsavel VARCHAR(800)
 );
-  
+
+INSERT INTO aluno VALUES (
+  1485484, 'Julia', '2008-10-17', '741.852.963-36', '789978954', 'feminino',
+  'julia@gmail.com', '(89)7859-5621', 'Av. Brasil', '87945745', 78, 'casa',
+  'Centro', 'Foz do Iguaçu', 'Paraná', 'DS', 'Matutino', '3C',
+  'Bruno Duarte', 'pai', '123.456.789-55', '(99)97895-7850', 'bruno@gmail.com'
+);
+
+CREATE TABLE IF NOT EXISTS fato (
+  id_fato INTEGER PRIMARY KEY AUTOINCREMENT,
+  descricao VARCHAR(200) NOT NULL,
+  gravidade VARCHAR(30) NOT NULL
+);
+
+INSERT INTO fato (descricao, gravidade) VALUES
+('Dano ao patrimônio público', 'Gravíssimo');
+
+CREATE TABLE IF NOT EXISTS frequencia (
+  id_frequencia INTEGER PRIMARY KEY AUTOINCREMENT,
+  dia DATE NOT NULL,
+  quant_aulas INT NOT NULL,
+  ausencias INT NOT NULL,
+  turma VARCHAR(4) NOT NULL,
+  cpf_funcionario VARCHAR(14),
+  cgm INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf)
+);
+
+INSERT INTO frequencia (dia, quant_aulas, ausencias, turma, cpf_funcionario, cgm) VALUES
+('2025-10-25', 6, 4, '3C', '789.484.987-45', 1485484);
+
+CREATE TABLE IF NOT EXISTS responsavel (
+  id_responsavel INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  grau_parentesco TEXT,
+  telefone VARCHAR(15) NOT NULL UNIQUE,
+  cpf VARCHAR(16) NOT NULL UNIQUE,
+  email VARCHAR(50),
+  cgm INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm)
+);
+
+INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email, cgm) VALUES
+('Bruno Duarte', 'pai', '(88)89567-7850', '123.456.789-88', 'bruno@gmail.com', 1485484);
+
+CREATE TABLE IF NOT EXISTS encaminhamento (
+  id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo_fo TEXT NOT NULL,
+  justificativa TEXT NOT NULL,
+  providencia TEXT,
+  data DATE NOT NULL,
+  cgm INTEGER,
+  cpf_funcionario VARCHAR(14),
+  id_fato INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
+  FOREIGN KEY (id_fato) REFERENCES fato(id_fato)
+);
+
+INSERT INTO encaminhamento (tipo_fo, justificativa, providencia, data, cgm, cpf_funcionario, id_fato)
+VALUES ('Grave', 'Aluno bateu no outro', 'Patrulha Escolar', '2025-04-03', 1485484, '789.484.987-45', 1);
+
+CREATE TABLE IF NOT EXISTS ata (
+  id_ata INTEGER PRIMARY KEY AUTOINCREMENT,
+  aluno VARCHAR(50) NOT NULL,
+  dia DATE NOT NULL,
+  assunto VARCHAR(500) NOT NULL,
+  monitor VARCHAR(50) NOT NULL,
+  conteudo VARCHAR(300),
+  encaminhamento VARCHAR(200),
+  cgm INTEGER NOT NULL,
+  turma VARCHAR(3) NOT NULL,
+  prof VARCHAR(20),
+  fato VARCHAR(20) NOT NULL
+);
+
+INSERT INTO ata (aluno, dia, assunto, monitor, conteudo, encaminhamento, cgm, turma, prof, fato)
+VALUES ('Julia', '2025-02-03', 'Desacato a funcionário público', 'Cabo Ramalho',
+'Aluno faltou com respeito com as merendeiras', 'Diretoria', 1485484, '3C', 'Daffara', 'Gravíssimo');
+
+CREATE TABLE IF NOT EXISTS ocorrencia (
+  id_sequencial_ocorrencia INTEGER PRIMARY KEY AUTOINCREMENT,
+  cpf_funcionario VARCHAR(14),
+  data DATE NOT NULL,
+  horario VARCHAR(5),
+  cgm_aluno INTEGER,
+  obs VARCHAR(500),
+  turma VARCHAR(3) NOT NULL,
+  id_fato INTEGER,
+  FOREIGN KEY (id_fato) REFERENCES fato(id_fato),
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
+  FOREIGN KEY (cgm_aluno) REFERENCES aluno(cgm)
+);
+
+INSERT INTO ocorrencia (id_fato, cpf_funcionario, data, horario, cgm_aluno, obs, turma)
+VALUES (1, '789.484.987-45', '2025-04-24', '09:55', 1485484, 'Aluno demorou para entrar na sala', '3C');
+
 SELECT 
   oco.id_sequencial_ocorrencia,
   f.descricao AS fato_descricao,
@@ -142,34 +171,28 @@ SELECT
   oco.data,
   oco.horario,
   oco.obs
-FROM 
-  ocorrencia oco
-INNER JOIN fato f ON oco.id_fato = f.id_fato
-INNER JOIN aluno a ON oco.cgm_aluno = a.cgm
-INNER JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
+FROM ocorrencia oco
+JOIN fato f ON oco.id_fato = f.id_fato
+JOIN aluno a ON oco.cgm_aluno = a.cgm
+JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
 
 SELECT 
-  f.ausencias AS freq_aluno,
+  f.ausencias AS faltas,
   f.quant_aulas AS aulas,
   a.nome AS nome_aluno,
-  a.turma AS turma_aluno
-FROM 
-  frequencia f
-INNER JOIN aluno a ON f.cgm = a.cgm;
+  a.turma AS turma_aluno,
+  func.nome AS professor
+FROM frequencia f
+JOIN aluno a ON f.cgm = a.cgm
+JOIN funcionario func ON f.cpf_funcionario = func.cpf;
 
 SELECT 
   e.id_encaminhamento,
-  f.descricao AS fato_descricao,
-  a.nome AS nome_aluno,
-  func.nome AS nome_funcionario,
+  f.descricao AS fato,
+  a.nome AS aluno,
+  func.nome AS funcionario,
   e.data
-FROM 
-  encaminhamento e
-INNER JOIN fato f ON e.id_fato = f.id_fato
-INNER JOIN aluno a ON e.cgm = a.cgm
-INNER JOIN funcionario func ON e.cpf_funcionario = func.cpf;
-
-
-
-  
-  
+FROM encaminhamento e
+JOIN fato f ON e.id_fato = f.id_fato
+JOIN aluno a ON e.cgm = a.cgm
+JOIN funcionario func ON e.cpf_funcionario = func.cpf;
