@@ -1,45 +1,199 @@
--- serve para nomear a tabela e seu elemento correspondente 
-SELECT usuarios.nome AS nome_USUARIO --tabela e seu elemento correspondente  -- nome dado
-select livros.titulo as titulo_LIVRO 
-SELECT autores.nome as nome_AUTOR 
-SELECT emprestimo.data_emprestimo as data-EMPRESTIMO 
 
--- define a tabela principal 
-FROM emprestimos demo
+CREATE TABLE IF NOT EXISTS funcao (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  funcionario VARCHAR(100) NOT NULL,
+  descricao VARCHAR(150) NOT NULL,
+  contrato VARCHAR(500) NOT NULL
+);
 
--- puxa por id semelhante entre tabelas 
-INNER JOIN usuarios on emprestimo.id_usuario = usuario.id_usuario  
-inner join livros on empretimo.id_livros = livros.id_livros 
-INNER JOIN autores on livro.id_autor = autor.id_autor 
+INSERT INTO funcao (funcionario, descricao, contrato) VALUES
+('Diretora Gabriela', 'Diretora da escola', '1 ano');
 
--- busca mais especifica (por tipo)
-WHERE emprestimo.tipo = "c" 
+CREATE TABLE IF NOT EXISTS funcionario (
+  nome VARCHAR(100) NOT NULL,
+  cpf VARCHAR(14) PRIMARY KEY,
+  nascimento DATE NOT NULL,
+  rg VARCHAR(16) NOT NULL,
+  genero TEXT,
+  estado_civil TEXT,
+  email TEXT,
+  email_institucional TEXT,
+  telefone VARCHAR(15) NOT NULL UNIQUE,
+  telefone_alternativo VARCHAR(15),
+  cep VARCHAR(9),
+  numero INTEGER,
+  complemento VARCHAR(200),
+  bairro VARCHAR(100),
+  cidade VARCHAR(250),
+  estado VARCHAR(150),
+  data_adimicao DATE NOT NULL,
+  cargo VARCHAR(500),
+  carga_horaria INTEGER,
+  contrato VARCHAR(80),
+  numero_registro INTEGER,
+  id_funcao INTEGER,
+  FOREIGN KEY (id_funcao) REFERENCES funcao(id)
+);
 
+INSERT INTO funcionario VALUES (
+  'Carlos Silva', '789.484.987-45', '1980-05-20', '123456789', 'masculino', 'solteiro',
+  'carlos@gmail.com', 'carlos@escola.gov', '(11)91234-5678', '(11)99876-5432', '12345-678', 123,
+  'apt 10', 'centro', 'São Paulo', 'SP', '2020-01-01', 'Professor', 40, 'CLT', 123456, 1
+);
 
+CREATE TABLE IF NOT EXISTS aluno (
+  cgm INTEGER PRIMARY KEY,
+  nome VARCHAR(400) NOT NULL,
+  nascimento DATE NOT NULL,
+  cpf_aluno VARCHAR(14) NOT NULL UNIQUE,
+  rg VARCHAR(16) NOT NULL UNIQUE,
+  genero TEXT,
+  email_aluno VARCHAR(800),
+  telefone_aluno VARCHAR(15),
+  endereco VARCHAR(500),
+  cep VARCHAR(9),
+  numero INTEGER,
+  complemento VARCHAR(200),
+  bairro VARCHAR(100),
+  cidade VARCHAR(250),
+  estado VARCHAR(150),
+  curso VARCHAR(50) NOT NULL,
+  turno VARCHAR(20) NOT NULL,
+  turma VARCHAR(10) NOT NULL,
+  responsavel VARCHAR(500),
+  grau_parentesco VARCHAR(40),
+  cpf_responsavel VARCHAR(14) NOT NULL,
+  telefone_responsavel VARCHAR(15),
+  email_responsavel VARCHAR(800)
+);
 
---Listar todos os encaminhamentosAdd commentMore actions
-SELECT * FROM encaminhamento ;
+INSERT INTO aluno VALUES (
+  1485484, 'Julia', '2008-10-17', '741.852.963-36', '789978954', 'feminino',
+  'julia@gmail.com', '(89)7859-5621', 'Av. Brasil', '87945745', 78, 'casa',
+  'Centro', 'Foz do Iguaçu', 'Paraná', 'DS', 'Matutino', '3C',
+  'Bruno Duarte', 'pai', '123.456.789-55', '(99)97895-7850', 'bruno@gmail.com'
+);
 
---Listar todos os F.Os
-SELECT * FROM fato  ;
+CREATE TABLE IF NOT EXISTS fato (
+  id_fato INTEGER PRIMARY KEY AUTOINCREMENT,
+  descricao VARCHAR(200) NOT NULL,
+  gravidade VARCHAR(30) NOT NULL
+);
 
---Listar todos as ocorrencias
-SELECT * FROM ocorrencia ;
+INSERT INTO fato (descricao, gravidade) VALUES
+('Dano ao patrimônio público', 'Gravíssimo');
 
---Listar todos os funcionarios 
-SELECT * FROM funcionario  ;
+CREATE TABLE IF NOT EXISTS frequencia (
+  id_frequencia INTEGER PRIMARY KEY AUTOINCREMENT,
+  dia DATE NOT NULL,
+  quant_aulas INT NOT NULL,
+  ausencias INT NOT NULL,
+  turma VARCHAR(4) NOT NULL,
+  cpf_funcionario VARCHAR(14),
+  cgm INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf)
+);
 
---Listar todos as frequencias
-SELECT * FROM frequencia;
+INSERT INTO frequencia (dia, quant_aulas, ausencias, turma, cpf_funcionario, cgm) VALUES
+('2025-10-25', 6, 4, '3C', '789.484.987-45', 1485484);
 
---Listar todos as atas
-SELECT * FROM ata ;
+CREATE TABLE IF NOT EXISTS responsavel (
+  id_responsavel INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  grau_parentesco TEXT,
+  telefone VARCHAR(15) NOT NULL UNIQUE,
+  cpf VARCHAR(16) NOT NULL UNIQUE,
+  email VARCHAR(50),
+  cgm INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm)
+);
 
---Listar todos os encaminhamentos ordenados aluno 
-SELECT * FROM encaminhamento ORDER BY cgm;
+INSERT INTO responsavel (nome, grau_parentesco, telefone, cpf, email, cgm) VALUES
+('Bruno Duarte', 'pai', '(88)89567-7850', '123.456.789-88', 'bruno@gmail.com', 1485484);
 
---Listar todos os frequencia ordenados aluno 
-SELECT * FROM frequencia ORDER BY cgm; 
+CREATE TABLE IF NOT EXISTS encaminhamento (
+  id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo_fo TEXT NOT NULL,
+  justificativa TEXT NOT NULL,
+  providencia TEXT,
+  data DATE NOT NULL,
+  cgm INTEGER,
+  cpf_funcionario VARCHAR(14),
+  id_fato INTEGER,
+  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
+  FOREIGN KEY (id_fato) REFERENCES fato(id_fato)
+);
 
---Listar todos os alunos ordenados nome
-SELECT * FROM aluno  ORDER BY nome;
+INSERT INTO encaminhamento (tipo_fo, justificativa, providencia, data, cgm, cpf_funcionario, id_fato)
+VALUES ('Grave', 'Aluno bateu no outro', 'Patrulha Escolar', '2025-04-03', 1485484, '789.484.987-45', 1);
+
+CREATE TABLE IF NOT EXISTS ata (
+  id_ata INTEGER PRIMARY KEY AUTOINCREMENT,
+  aluno VARCHAR(50) NOT NULL,
+  dia DATE NOT NULL,
+  assunto VARCHAR(500) NOT NULL,
+  monitor VARCHAR(50) NOT NULL,
+  conteudo VARCHAR(300),
+  encaminhamento VARCHAR(200),
+  cgm INTEGER NOT NULL,
+  turma VARCHAR(3) NOT NULL,
+  prof VARCHAR(20),
+  fato VARCHAR(20) NOT NULL
+);
+
+INSERT INTO ata (aluno, dia, assunto, monitor, conteudo, encaminhamento, cgm, turma, prof, fato)
+VALUES ('Julia', '2025-02-03', 'Desacato a funcionário público', 'Cabo Ramalho',
+'Aluno faltou com respeito com as merendeiras', 'Diretoria', 1485484, '3C', 'Daffara', 'Gravíssimo');
+
+CREATE TABLE IF NOT EXISTS ocorrencia (
+  id_sequencial_ocorrencia INTEGER PRIMARY KEY AUTOINCREMENT,
+  cpf_funcionario VARCHAR(14),
+  data DATE NOT NULL,
+  horario VARCHAR(5),
+  cgm_aluno INTEGER,
+  obs VARCHAR(500),
+  turma VARCHAR(3) NOT NULL,
+  id_fato INTEGER,
+  FOREIGN KEY (id_fato) REFERENCES fato(id_fato),
+  FOREIGN KEY (cpf_funcionario) REFERENCES funcionario(cpf),
+  FOREIGN KEY (cgm_aluno) REFERENCES aluno(cgm)
+);
+
+INSERT INTO ocorrencia (id_fato, cpf_funcionario, data, horario, cgm_aluno, obs, turma)
+VALUES (1, '789.484.987-45', '2025-04-24', '09:55', 1485484, 'Aluno demorou para entrar na sala', '3C');
+
+SELECT 
+  oco.id_sequencial_ocorrencia,
+  f.descricao AS fato_descricao,
+  a.nome AS nome_aluno,
+  func.nome AS nome_funcionario,
+  oco.data,
+  oco.horario,
+  oco.obs
+FROM ocorrencia oco
+JOIN fato f ON oco.id_fato = f.id_fato
+JOIN aluno a ON oco.cgm_aluno = a.cgm
+JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
+
+SELECT 
+  f.ausencias AS faltas,
+  f.quant_aulas AS aulas,
+  a.nome AS nome_aluno,
+  a.turma AS turma_aluno,
+  func.nome AS professor
+FROM frequencia f
+JOIN aluno a ON f.cgm = a.cgm
+JOIN funcionario func ON f.cpf_funcionario = func.cpf;
+
+SELECT 
+  e.id_encaminhamento,
+  f.descricao AS fato,
+  a.nome AS aluno,
+  func.nome AS funcionario,
+  e.data
+FROM encaminhamento e
+JOIN fato f ON e.id_fato = f.id_fato
+JOIN aluno a ON e.cgm = a.cgm
+JOIN funcionario func ON e.cpf_funcionario = func.cpf;
