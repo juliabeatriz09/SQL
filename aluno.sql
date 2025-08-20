@@ -18,7 +18,7 @@ CREATE table if not EXISTS aluno(
   turno varchar (20) NOT NULL,
   turma varchar (10) not NULL,
  id_responsavel (11) not NULL UNIQUE,
-  foreign key (cpf_responsavel) references responsavel (cpf),
+  foreign key (id_responsavel) references responsavel (id_responsavel,
   id_frequencia integer,
   foreign key (id_frequencia) references frequencias (id_frequencia),
   id_fo integer,
