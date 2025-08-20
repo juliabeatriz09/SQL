@@ -41,11 +41,12 @@ INSERT INTO funcionario VALUES (
 );
 
 CREATE TABLE IF NOT EXISTS aluno (
-  cgm INTEGER PRIMARY KEY,
+  id_aluno INTEGER PRIMARY KEY AUTOINCREMENT,
+  cgm INTEGER NOT NULL UNIQUE,
   nome VARCHAR(400) NOT NULL,
-  nascimento DATE NOT NULL,
-  cpf_aluno VARCHAR(14) NOT NULL UNIQUE,
-  rg VARCHAR(16) NOT NULL UNIQUE,
+  nascimento DATE NOT NULL, 
+  cpf_aluno VARCHAR(11) NOT NULL UNIQUE,
+  rg VARCHAR(9) NOT NULL UNIQUE,
   genero TEXT,
   email_aluno VARCHAR(800),
   telefone_aluno VARCHAR(15),
@@ -59,13 +60,13 @@ CREATE TABLE IF NOT EXISTS aluno (
   curso VARCHAR(50) NOT NULL,
   turno VARCHAR(20) NOT NULL,
   turma VARCHAR(10) NOT NULL,
-  responsavel VARCHAR(500),
-  grau_parentesco VARCHAR(40),
-  cpf_responsavel VARCHAR(14) NOT NULL,
-  telefone_responsavel VARCHAR(15),
-  email_responsavel VARCHAR(800)
+  id_responsavel INTEGER NOT NULL,
+  id_frequencia INTEGER,
+  id_fo INTEGER,
+  FOREIGN KEY (id_responsavel) REFERENCES responsavel (id_responsavel),
+  FOREIGN KEY (id_frequencia) REFERENCES frequencias (id_frequencia),
+  FOREIGN KEY (id_fo) REFERENCES fo (id_fo)
 );
-
 INSERT INTO aluno VALUES (
   1485484, 'Julia', '2008-10-17', '741.852.963-36', '789978954', 'feminino',
   'julia@gmail.com', '(89)7859-5621', 'Av. Brasil', '87945745', 78, 'casa',
