@@ -160,3 +160,37 @@ CREATE TABLE IF NOT EXISTS ocorrencia (
 
 INSERT INTO ocorrencia (id_fato, cpf_funcionario, data, horario, cgm_aluno, obs, turma)
 VALUES (1, '789.484.987-45', '2025-04-24', '09:55', '1485484', 'Aluno demorou para entrar na sala', '3C');
+SELECT 
+  oco.id_sequencial_ocorrencia,
+  f.descricao AS fato_descricao,
+  a.nome AS nome_aluno,
+  func.nome AS nome_funcionario,
+  oco.data,
+  oco.horario,
+  oco.obs
+FROM ocorrencia oco
+JOIN fato f ON oco.id_fato = f.id_fato
+JOIN aluno a ON oco.cgm_aluno = a.cgm
+JOIN funcionario func ON oco.cpf_funcionario = func.cpf;
+
+SELECT 
+  f.ausencias AS faltas,
+  f.quant_aulas AS aulas,
+  a.nome AS nome_aluno,
+  a.turma AS turma_aluno,
+  func.nome AS professor
+FROM frequencia f
+JOIN aluno a ON f.cgm = a.cgm
+JOIN funcionario func ON f.cpf_funcionario = func.cpf;
+
+SELECT 
+  e.id_encaminhamento,
+  f.descricao AS fato,
+  a.nome AS aluno,
+  func.nome AS funcionario,
+  e.data
+FROM encaminhamento e
+JOIN fato f ON e.id_fato = f.id_fato
+JOIN aluno a ON e.cgm = a.cgm
+JOIN funcionario func ON e.cpf_funcionario = func.cpf;
+VALUES (1, '789.484.987-45', '2025-04-24', '09:55', '1485484', 'Aluno demorou para entrar na sala', '3C');
