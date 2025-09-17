@@ -1,15 +1,17 @@
-create TABLE if NOT EXISTS encaminhamento(
-  id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo_fo TEXT not NULL ,
-  justificativa TEXT not NULL,
-  providencia TEXT,
-  data DATE not NULL,
-  cgm INTEGER,
-  funcionario VARCHAR(14),
-  FOREIGN KEY (cgm) REFERENCES aluno(cgm),
-  FOREIGN KEY (funcionario) REFERENCES funcionario (cpf)
-);
-
+CREATE TABLE IF NOT EXISTS encaminhamento (
+                id_encaminhamento INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_fo TEXT not NULL ,
+                justificativa TEXT not NULL,
+                providencia TEXT,
+                dia DATE not NULL,
+                turma integer,
+                prazo DATE,
+                cgm INTEGER,
+                obs integer,
+                funcionario VARCHAR(14),
+                FOREIGN KEY (cgm) REFERENCES aluno(cgm),
+                FOREIGN KEY (funcionario) REFERENCES funcionario (cpf)
+    );
 create TABLE if NOT EXISTS responsavel(
   id_responavel INTEGER PRIMARY KEY AUTOINCREMENT,
   nome VARCHAR (100)not NULL,
